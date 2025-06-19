@@ -1,4 +1,8 @@
 <?php
+namespace products;
+
+use Database;
+use PDO;
 
 class ProductGateway {
     private PDO $conn;
