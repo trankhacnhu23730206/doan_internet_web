@@ -1,9 +1,13 @@
 <?php
+namespace products;
 
 class ProductController
 {
-    public function __construct(private ProductGateway $gateway) {
-        
+
+    private ProductGateway $gateway;
+
+    public function __construct(ProductGateway $gateway) {
+        $this->gateway = $gateway;
     }
 
     public function processRequest(string $method, ?string $id){

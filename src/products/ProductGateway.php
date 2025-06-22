@@ -1,4 +1,8 @@
 <?php
+namespace products;
+
+use Database;
+use PDO;
 
 class ProductGateway {
     private PDO $conn;
@@ -48,11 +52,7 @@ class ProductGateway {
         $stmt->execute();
 
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // if ($data = false) {
-        //     $data["is_available"] = (bool) $data["is_available"];
-        // }
-
+        
         return $data;
 
 
@@ -69,7 +69,6 @@ class ProductGateway {
         $stmt->bindValue(":name", $new["name"] ?? $current["name"], PDO::PARAM_STR);
         $stmt->bindValue(":size", $new["size"] ?? $current["size"], PDO::PARAM_INT);
         $stmt->bindValue(":is_available", $new["is_available"] ?? $current["is_available"], PDO::PARAM_BOOL);
-        
         $stmt->bindValue(":id", $current["id"], PDO::PARAM_INT);
         
         $stmt->execute();
