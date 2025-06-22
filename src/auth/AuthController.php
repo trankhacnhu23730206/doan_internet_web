@@ -1,6 +1,6 @@
 <?php
+namespace auth;
 
-use auth\AuthGateway;
 
 require_once 'config.php';
 require_once 'JWT.php';
@@ -26,13 +26,18 @@ class AuthController {
 
     public function register() {
         $data = (array) json_decode(file_get_contents("php://input"), true);
-
-
         $id = $this->authGateway->createAdmin(data: $data);
-
-
         http_response_code(201);       
         echo json_encode(["message" => "Registered successfully $id"]);
+    }
+
+
+    public function updateInfor() {
+        $data = (array) json_decode(file_get_contents("php://input"), true);
+        $currentInfor = $this->authGateway->getAdminByEmail($data["email"]);
+        $id = $this->authGateway->updateAdmin($currentInfor, $data);
+        http_response_code(201);       
+        echo json_encode(["message" => "Update Infor successfully $id"]);
     }
 
     public function me() {

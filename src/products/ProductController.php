@@ -85,7 +85,7 @@ class ProductController
                     break;
                 }
 
-                $id = $this->gateway->create($data);
+                $id = $this->gateway->create(data: $data);
 
 
                 http_response_code(201);

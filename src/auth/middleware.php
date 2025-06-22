@@ -1,4 +1,5 @@
 <?php
+namespace auth;
 require_once 'JWT.php';
 require_once 'config.php';
 
@@ -12,6 +13,7 @@ function authMiddleware() {
 
     $token = str_replace('Bearer ', '', $headers['Authorization']);
     $user = JWT::decode($token, JWT_SECRET);
+    
 
     if (!$user || $user['exp'] < time()) {
         http_response_code(401);
