@@ -1,4 +1,6 @@
 <?php
+namespace auth;
+
 class JWT {
     public static function encode($payload, $secret) {
         $header = ['alg' => 'HS256', 'typ' => 'JWT'];
