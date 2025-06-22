@@ -4,7 +4,7 @@ namespace products;
 use Database;
 use PDO;
 
-class ProductGateway {
+class ProductService {
     private PDO $conn;
 
     public function __construct(Database $database) {
@@ -46,16 +46,12 @@ class ProductGateway {
         $sql = "SELECT * FROM product WHERE id = :id";
 
         $stmt = $this->conn->prepare(query: $sql);
-
         $stmt->bindValue("id", $id, PDO::PARAM_INT);
-
         $stmt->execute();
 
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
         
         return $data;
-
-
     }
 
      public function update(array $current, array $new): int
@@ -83,9 +79,7 @@ class ProductGateway {
                 WHERE id = :id";
                 
         $stmt = $this->conn->prepare($sql);
-        
         $stmt->bindValue(":id", $id, PDO::PARAM_INT);
-        
         $stmt->execute();
         
         return $stmt->rowCount();

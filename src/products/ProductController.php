@@ -4,9 +4,9 @@ namespace products;
 class ProductController
 {
 
-    private ProductGateway $gateway;
+    private ProductService $gateway;
 
-    public function __construct(ProductGateway $gateway) {
+    public function __construct(ProductService $gateway) {
         $this->gateway = $gateway;
     }
 
