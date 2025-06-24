@@ -4,6 +4,8 @@ namespace auth;
 
 require_once 'config.php';
 require_once 'JWT.php';
+require_once 'Middleware.php';
+
 
 class AuthController {
     private AuthService $authGateway;
@@ -42,7 +44,13 @@ class AuthController {
                     echo json_encode(["message" => "Invalid auth route"]);
                 }
                 break;
-;
+
+            case "GET": 
+                if ($id === "me") {
+                    $this->me();
+                }
+                break;
+
 
            default:
                 http_response_code(response_code: 405);
@@ -79,8 +87,12 @@ class AuthController {
     }
 
     private function me() {
-        $user = authMiddleware();
-        echo json_encode(["user" => $user]);
+        $user = Middleware::authBearerToken();
+        if ($user) {
+            echo json_encode([
+                "user"=>$user]);
+        } 
+
     }
 
     private function logout() {

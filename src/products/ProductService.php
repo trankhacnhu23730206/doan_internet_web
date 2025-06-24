@@ -54,6 +54,19 @@ class ProductService {
         return $data;
     }
 
+
+    public function getProductByName($product_name) {
+        $sql = "SELECT * FROM product WHERE name = :product_name";
+
+        $stmt = $this->conn->prepare(query: $sql);
+        $stmt->bindValue("product_name", $product_name, PDO::PARAM_STR);
+        $stmt->execute();
+
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $data;
+    }
+
      public function update(array $current, array $new): int
     {
         $sql = "UPDATE product

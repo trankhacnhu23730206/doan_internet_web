@@ -32,14 +32,14 @@ switch ($parts[1]) {
         break;
 
     case "auth":
-        require_once __DIR__ . "/src/auth/AuthController.php";
+        // require_once __DIR__ . "/src/auth/AuthController.php";
         $gatewayAuth = new AuthService($database);
         $authController = new AuthController(authGateway: $gatewayAuth);
         $authController->processRequestAuth($_SERVER["REQUEST_METHOD"], $id);
         break;
 
     case "reviews":
-        require_once __DIR__ . "/src/reviews/ReviewController.php";
+        // require_once __DIR__ . "/src/reviews/ReviewController.php";
         $reviewService = new ReviewService($database);
         $reviewController = new ReviewController($reviewService);
         $reviewController->processRequestReviews($_SERVER["REQUEST_METHOD"], $id);

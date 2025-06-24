@@ -1,10 +1,10 @@
 <?php
 namespace products;
 
-class ProductController
-{
+use auth\Middleware;
 
-    private ProductService $gateway;
+class ProductController
+{    private ProductService $gateway;
 
     public function __construct(ProductService $gateway) {
         $this->gateway = $gateway;
@@ -21,6 +21,12 @@ class ProductController
 
     private function processResourceRequest(string $method, ?string $id){
         $product = $this->gateway->get( $id);
+   
+        if ($id === "findproduct") {
+            $data = (array) json_decode(file_get_contents("php://input"), true);
+            echo json_encode($this->gateway->getProductByName( $data["product_name"]));
+            return;
+        }
 
         if (!$product) {   
             http_response_code(404);
@@ -69,9 +75,11 @@ class ProductController
     }
 
     private function processConllectionRequets(string $method){
+     
+
         switch ($method) {
             case "GET":
-                echo json_encode($this->gateway->getAll());  
+                echo json_encode($this->gateway->getAll()); 
                 break;
 
             case "POST":
