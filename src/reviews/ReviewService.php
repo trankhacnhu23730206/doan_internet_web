@@ -4,7 +4,7 @@ use Database;
 use PDO;
 
 
-class ReviewGateWay {
+class ReviewService {
     private $conn;
 
     public function __construct(Database $database) {

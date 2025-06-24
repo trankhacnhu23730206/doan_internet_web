@@ -2,7 +2,7 @@
 namespace auth;
 use Database;
 use PDO;
-class AuthGateway {
+class AuthService {
     private PDO $conn;
 
     public function __construct(Database $database) {
